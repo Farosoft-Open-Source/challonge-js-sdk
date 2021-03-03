@@ -3,8 +3,6 @@ on: [push]
 
 jobs:
   build:
-    environment:
-      name: challonge-js-sdk
     name: Publish to npm
     runs-on: ubuntu-latest
     strategy:
