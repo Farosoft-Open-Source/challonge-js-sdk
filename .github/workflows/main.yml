@@ -10,6 +10,8 @@ jobs:
         node-version: [14.x]
 
     steps:
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
       - uses: actions/checkout@v2
         name: Checking out code
       - name: Build on Node.js ${{ matrix.node-version }}
@@ -17,8 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --ignore-scripts
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
       - run: npm run build
 
   publish:
