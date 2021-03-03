@@ -16,11 +16,11 @@ jobs:
         name: Checking out code
       - name: Build on Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
+        with:
+          node-version: ${{ matrix.node-version }}
       - run: npm ci --ignore-scripts
       - run: npm run build
-  
+
   publish:
     if: github.ref == 'refs/heads/main'
     needs: build
@@ -30,8 +30,8 @@ jobs:
         name: Checking out code
       - name: Build on Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
-          with:
-            node-version: 14
+        with:
+          node-version: 14
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
