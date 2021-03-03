@@ -34,9 +34,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Publish
+      - name: Print variables
         run: |
           printenv
+      - name: Publish
+        run: |
           npm publish --ignore-scripts
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
