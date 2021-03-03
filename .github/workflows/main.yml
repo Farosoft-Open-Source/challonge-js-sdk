@@ -22,6 +22,8 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
       - run: npm run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
 
   publish:
     environment:
