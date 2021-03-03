@@ -43,6 +43,6 @@ jobs:
           printenv
       - name: Publish
         run: |
-          npm publish --ignore-scripts
+          npm publish --ignore-scripts --verbose
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
