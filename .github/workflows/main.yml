@@ -36,6 +36,7 @@ jobs:
           node-version: 14
       - name: Publish
         run: |
+          printenv
           npm publish --ignore-scripts
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
