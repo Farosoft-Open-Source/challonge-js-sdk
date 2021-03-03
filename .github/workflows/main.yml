@@ -27,7 +27,7 @@ jobs:
 
   publish:
     environment:
-      name: challonge-js-sdk
+      name: build
     if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
