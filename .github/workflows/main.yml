@@ -21,7 +21,9 @@ jobs:
       - run: npm ci --ignore-scripts
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
-      - run: npm run build
+      - run: |
+          rm -rf dist
+          npm run build
         env:
           NPM_TOKEN: ${{ secrets.NPM_API_KEY }}
 
