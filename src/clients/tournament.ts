@@ -41,6 +41,13 @@ export async function createTournament(tournament: TournamentObject): Promise<To
     .catch(reason => handleError(reason));
 }
 
+export async function updateTournament(id: number, tournament: TournamentObject): Promise<TournamentResponse> {
+    const params = TournamentParamBuild(tournament);
+    return await axios.put(`https://api.challonge.com/v1/tournaments/${id}.json?api_key=`+ API_KEY + "&" + params)
+    .then(response => handleResponse(response))
+    .catch(reason => handleError(reason));
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(reason: AxiosResponse): any {
     console.log(reason);
@@ -59,10 +66,3 @@ function handleResponse(response: AxiosResponse): TournamentResponse {
 interface TournamentId {
     id: number
 }
-
-const tourney: TournamentObject = {
-    name: "Climbazard"
-};
-
-createTournament(tourney).then(response => console.log(response));
-
