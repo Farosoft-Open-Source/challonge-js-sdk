@@ -66,5 +66,3 @@ function handleResponse(response: AxiosResponse): TournamentResponse {
 interface TournamentId {
     id: number
 }
-
-getTournament({ id: 9444963}).then(response => console.log(response));
