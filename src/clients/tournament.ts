@@ -41,7 +41,8 @@ export async function createTournament(tournament: TournamentObject): Promise<To
     .catch(reason => handleError(reason));
 }
 
-function handleError(reason: unknown): any {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleError(reason: AxiosResponse): any {
     console.log(reason);
     return { status: 400, data: {} };
 }
