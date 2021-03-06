@@ -23,7 +23,7 @@ export async function getAllTournaments(): Promise<TournamentList> {
 
 
 export async function getTournament({id}: TournamentId): Promise<TournamentResponse> {
-    return await axios.get("https://api.challonge.com/v1/tournaments/" + id + ".json?api_key=" + API_KEY)
+    return await axios.get("https://api.challonge.com/v1/tournaments/" + id + ".json?api_key=" + API_KEY + "&include_participants=1&include_matches=1")
     .then(response => handleResponse(response))
     .catch(reason => handleError(reason));
 }
@@ -66,3 +66,5 @@ function handleResponse(response: AxiosResponse): TournamentResponse {
 interface TournamentId {
     id: number
 }
+
+getTournament({ id: 9444963}).then(response => console.log(response));
