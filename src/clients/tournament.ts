@@ -48,6 +48,18 @@ export async function updateTournament(id: number, tournament: TournamentObject)
     .catch(reason => handleError(reason));
 }
 
+export async function proccessTournamentCheckins({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/process_check_ins.json?api_key="+ API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse(response))
+    .catch(reason => handleError(reason));
+}
+
+export async function abortTournamentCheckins({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/abort_check_in.json?api_key="+ API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse(response))
+    .catch(reason => handleError(reason));
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(reason: AxiosResponse): any {
     console.log(reason);
