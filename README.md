@@ -11,7 +11,7 @@ $ npm install challonge-api-js
 Every type available for Challonge is available with this SDK. So if I wanted to get my tournaments, I would use
 
 ```
-import * from 'client/tournament' as Tournament
+import { Tournaments } from "challonge-api-js";
 
 const tournmanet = Tournament.get(id: 2944894);
 

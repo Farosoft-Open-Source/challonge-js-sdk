@@ -5,7 +5,7 @@ jobs:
   build:
     environment:
       name: build
-    name: Publish to npm
+    name: Build NPM package
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,6 +32,7 @@ jobs:
       name: build
     if: github.ref == 'refs/heads/main'
     needs: build
+    name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,9 +41,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Print variables
-        run: |
-          printenv
       - name: Publish
         run: |
           npm publish --ignore-scripts --verbose
