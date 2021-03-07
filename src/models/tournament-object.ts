@@ -64,7 +64,7 @@ export interface TournamentObject {
     group_stages_were_started?:             boolean;
 }
 
-export function TournamentParamBuild(tournament: TournamentObject): string {
+export function TournamentParamBuilder(tournament: TournamentObject): string {
     const valueArray = Object.keys(tournament);
     const tournamentParams = valueArray.map((key) => `tournament[${key}]=${tournament[key as keyof TournamentObject]}`).join("&");
     console.log(tournamentParams);
