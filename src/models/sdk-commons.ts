@@ -7,6 +7,10 @@ export interface TournamentId {
 export interface ParticipantId {
     participant_id: number
 }
+
+export interface MatchId {
+    match_id: number
+}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function handleError(reason: AxiosResponse): any {
     console.log(reason);

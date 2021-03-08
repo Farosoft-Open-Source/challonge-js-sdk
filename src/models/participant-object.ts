@@ -32,6 +32,5 @@ export interface ParticipantObject {
 export function ParticipantParamBuilder(participant: ParticipantObject): string {
     const valueArray = Object.keys(participant);
     const participantParams = valueArray.map((key) => `participant[${key}]=${participant[key as keyof ParticipantObject]}`).join("&");
-    console.log(participantParams);
     return participantParams;
 }
