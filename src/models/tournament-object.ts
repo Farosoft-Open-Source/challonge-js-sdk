@@ -67,6 +67,5 @@ export interface TournamentObject {
 export function TournamentParamBuilder(tournament: TournamentObject): string {
     const valueArray = Object.keys(tournament);
     const tournamentParams = valueArray.map((key) => `tournament[${key}]=${tournament[key as keyof TournamentObject]}`).join("&");
-    console.log(tournamentParams);
     return tournamentParams;
 }
