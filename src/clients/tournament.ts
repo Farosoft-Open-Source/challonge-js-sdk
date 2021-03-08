@@ -58,3 +58,11 @@ export async function resetTournament({id}: TournamentId): Promise<TournamentRes
     .then(response => handleResponse<TournamentResponse>(response))
     .catch(reason => handleError(reason));
 }
+
+export async function finalizeTournament({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/finalize.json?api_key=" + API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse<TournamentResponse>(response))
+    .catch(reason => handleError(reason));
+}
+
+finalizeTournament({id: 9508577}).then(response => console.log(response));
