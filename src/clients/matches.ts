@@ -52,5 +52,3 @@ export async function reopenMatch({id}: TournamentId, {match_id}: MatchId): Prom
     .then(response => handleResponse<MatchResponse>(response))
     .catch(reason => handleError(reason));
 }
-
-reopenMatch({id: 9508830}, {match_id: 229997575}).then(response => console.log(response));
