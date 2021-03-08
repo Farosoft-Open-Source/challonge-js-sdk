@@ -1,5 +1,11 @@
 # **Challonge JS SDK**
 
+## Pre-requisites
+
+Users should create and account at [Challonge](https://challonge.com/).
+Get an API token from Challonge. You can follow the instructions [here](https://challonge.com/settings/developer)
+Set the token as an environment variable named: CHALLONGE_API_KEY
+
 ## Installation
 
 ```bash
