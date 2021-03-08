@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { TournamentId, handleError, handleResponse } from "../models/sdk-commons";
 import { TournamentList } from "../models/tournament-list";
 import { TournamentObject, TournamentParamBuilder } from "../models/tournament-object";
@@ -46,3 +46,23 @@ export async function updateTournament(id: number, tournament: TournamentObject)
     .then(response => handleResponse<TournamentResponse>(response))
     .catch(reason => handleError(reason));
 }
+
+export async function startTournament({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/start.json?api_key=" + API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse<TournamentResponse>(response))
+    .catch(reason => handleError(reason));
+}
+
+export async function resetTournament({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/reset.json?api_key=" + API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse<TournamentResponse>(response))
+    .catch(reason => handleError(reason));
+}
+
+export async function finalizeTournament({id}: TournamentId): Promise<TournamentResponse> {
+    return await axios.post("https://api.challonge.com/v1/tournaments/" + id + "/finalize.json?api_key=" + API_KEY + "&include_participants=1&include_matches=1")
+    .then(response => handleResponse<TournamentResponse>(response))
+    .catch(reason => handleError(reason));
+}
+
+finalizeTournament({id: 9508577}).then(response => console.log(response));
