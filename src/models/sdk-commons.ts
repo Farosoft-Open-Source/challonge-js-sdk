@@ -11,10 +11,17 @@ export interface ParticipantId {
 export interface MatchId {
     match_id: number
 }
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function handleError(reason: AxiosResponse): any {
     console.log(reason);
     return { status: 400, data: {} };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function handleErrorArrray(reason: AxiosResponse): any {
+    console.log(reason);
+    return { status: 400, data: [] };
 }
 
 export function handleResponse<T>(response: AxiosResponse): T  {

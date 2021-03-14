@@ -2,29 +2,35 @@ import axios from "axios";
 import { ParticipantList } from "../models/participant-list";
 import { ParticipantObject, ParticipantParamBuilder } from "../models/participant-object";
 import { ParticipantResponse } from "../models/participant-response";
-import { TournamentId, handleError, handleResponse, ParticipantId } from "../models/sdk-commons";
+import { TournamentId, handleError, handleResponse, ParticipantId, handleErrorArrray } from "../models/sdk-commons";
 
 const API_KEY = process.env.CHALLONGE_API_KEY;
 
 export async function getAllParticipants({id}: TournamentId): Promise<ParticipantList> {
-    const response = await axios.get(`https://api.challonge.com/v1/tournaments/${id}/participants.json?api_key=` + API_KEY);
+    return await axios.get(`https://api.challonge.com/v1/tournaments/${id}/participants.json?api_key=` + API_KEY).then(response => {
+        const list: ParticipantList = { participants: [] };
 
-    const list: ParticipantList = { participants: [] };
-
-    if (Array.isArray(response.data)) {
-        response.data.map(participant => {
-            const jsonData = JSON.stringify(participant);
-            const p:ParticipantObject = JSON.parse(jsonData).participant
-            return p;
-        }).map(parsedParticipant => list.participants.push(parsedParticipant));
-    } 
-
-    return list;
+        if (Array.isArray(response.data)) {
+            response.data.map(participant => {
+                const jsonData = JSON.stringify(participant);
+                const p:ParticipantObject = JSON.parse(jsonData).participant
+                return p;
+            }).map(parsedParticipant => list.participants.push(parsedParticipant));
+        } 
+    }).
+    catch(reason => handleErrorArrray(reason));
 }
 
 export async function createParticipant({id}: TournamentId, participant: ParticipantObject): Promise<ParticipantResponse> {
     const participantParams = ParticipantParamBuilder(participant);
     return await axios.post(`https://api.challonge.com/v1/tournaments/${id}/participants.json?api_key=` + API_KEY + "&" + participantParams)
+    .then(response => handleResponse<ParticipantResponse>(response))
+    .catch(reason => handleError(reason));
+}
+
+export async function createBulkParticipant({id}: TournamentId, participants: Array<string>): Promise<ParticipantResponse> {
+    const participantParams = participants.map(name => `participants[][name]=${name}`).join("&")
+    return await axios.post(`https://api.challonge.com/v1/tournaments/${id}/participants/bulk_add.json?api_key=${API_KEY}&${participantParams}`)
     .then(response => handleResponse<ParticipantResponse>(response))
     .catch(reason => handleError(reason));
 }
@@ -60,4 +66,6 @@ export async function removeAllParticipants({id}: TournamentId): Promise<Partici
     .catch(reason => handleError(reason));
 }
 
-removeAllParticipants({id: 9508830}).then(response => console.log(response));
+let participantObjecct: ParticipantObject = {
+    name: "eric"
+}
