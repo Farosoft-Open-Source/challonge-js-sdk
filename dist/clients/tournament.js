@@ -66,7 +66,3 @@ function handleResponse(response) {
     const jsonData = JSON.stringify(response.data);
     return JSON.parse(jsonData);
 }
-const tourney = {
-    name: "Climbazard"
-};
-createTournament(tourney).then(response => console.log(response));

@@ -64,5 +64,3 @@ export async function finalizeTournament({id}: TournamentId): Promise<Tournament
     .then(response => handleResponse<TournamentResponse>(response))
     .catch(reason => handleError(reason));
 }
-
-finalizeTournament({id: 9508577}).then(response => console.log(response));
