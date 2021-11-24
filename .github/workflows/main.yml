@@ -29,7 +29,7 @@ jobs:
 
   publish:
     environment:
-      name: build
+      name: publish
     if: github.ref == 'refs/heads/main'
     needs: build
     name: Publish to NPM
@@ -41,6 +41,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+      - name: Checking NPM User
+        run: |
+          npm whoami
       - name: Publish
         run: |
           npm publish --ignore-scripts --verbose
